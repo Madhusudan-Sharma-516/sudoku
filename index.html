@@ -1,0 +1,383 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>App Landing Page</title>
+    <style>
+      /* Base Styles & Dark Theme */
+      :root {
+        --bg-color: #02060c;
+        --text-main: #ffffff;
+        --text-muted: #94a3b8;
+        --accent: #3b82f6;
+        --glass-bg: rgba(255, 255, 255, 0.05);
+        --glass-border: rgba(255, 255, 255, 0.1);
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
+          Arial, sans-serif;
+      }
+
+      body {
+        background-color: var(--bg-color);
+        color: var(--text-main);
+        line-height: 1.6;
+        padding: 20px;
+        display: flex;
+        justify-content: center;
+      }
+
+      /* Glassmorphism Container */
+      .glass-card {
+        background: var(--glass-bg);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border: 1px solid var(--glass-border);
+        border-radius: 24px;
+        padding: 30px;
+        max-width: 800px;
+        width: 100%;
+        margin-top: 40px;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+      }
+
+      /* App Header Section */
+      .app-header {
+        display: flex;
+        gap: 24px;
+        align-items: center;
+        margin-bottom: 30px;
+      }
+
+      .app-logo {
+        width: 120px;
+        height: 120px;
+        border-radius: 24px;
+        object-fit: cover;
+        background-color: #1e293b; /* Fallback color */
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+      }
+
+      .app-info h1 {
+        font-size: 28px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-bottom: 4px;
+      }
+
+      /* Verified Badge SVG */
+      .verified-badge {
+        width: 24px;
+        height: 24px;
+        fill: #3b82f6;
+      }
+
+      .developer-link {
+        color: var(--accent);
+        text-decoration: none;
+        font-size: 16px;
+        font-weight: 500;
+      }
+
+      .developer-link:hover {
+        text-decoration: underline;
+      }
+
+      /* Stats Row */
+      .stats-row {
+        display: flex;
+        gap: 20px;
+        margin-top: 16px;
+        color: var(--text-muted);
+        font-size: 14px;
+      }
+
+      .stat-item {
+        display: flex;
+        flex-direction: column;
+        border-right: 1px solid var(--glass-border);
+        padding-right: 20px;
+      }
+
+      .stat-item:last-child {
+        border-right: none;
+      }
+
+      .stat-value {
+        color: var(--text-main);
+        font-weight: bold;
+        font-size: 16px;
+      }
+
+      /* Download Button */
+      .download-btn {
+        display: inline-block;
+        background-color: var(--text-main);
+        color: var(--bg-color);
+        padding: 12px 32px;
+        border-radius: 50px;
+        text-decoration: none;
+        font-weight: bold;
+        font-size: 16px;
+        margin-top: 20px;
+        transition:
+          transform 0.2s,
+          background-color 0.2s;
+      }
+
+      .download-btn:hover {
+        transform: scale(1.05);
+        background-color: #e2e8f0;
+      }
+
+      /* Carousel Section */
+      .carousel-container {
+        margin: 30px 0;
+      }
+
+      .carousel {
+        display: flex;
+        gap: 16px;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        padding-bottom: 12px;
+        /* Hide scrollbar for a cleaner look */
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+      }
+
+      .carousel::-webkit-scrollbar {
+        display: none;
+      }
+
+      .carousel img {
+        height: 400px;
+        border-radius: 16px;
+        scroll-snap-align: center;
+        object-fit: cover;
+        border: 1px solid var(--glass-border);
+      }
+
+      /* Description Section */
+      .description {
+        margin-top: 30px;
+      }
+
+      .description h2 {
+        font-size: 20px;
+        margin-bottom: 12px;
+        color: var(--text-main);
+      }
+
+      .description p {
+        color: var(--text-muted);
+        line-height: 1.8;
+      }
+
+      /* Mobile Responsiveness */
+      @media (max-width: 600px) {
+        .app-header {
+          flex-direction: column;
+          text-align: center;
+          gap: 16px;
+        }
+
+        .app-info h1 {
+          justify-content: center;
+        }
+
+        .stats-row {
+          justify-content: center;
+        }
+
+        .carousel img {
+          height: 300px; /* Smaller images on mobile */
+        }
+
+        .glass-card {
+          padding: 20px;
+          margin-top: 10px;
+        }
+      }
+      .description h3 {
+        font-size: 16px;
+        margin: 24px 0 8px 0;
+        color: var(--text-main);
+      }
+
+      .description p {
+        color: var(--text-muted);
+        line-height: 1.6;
+        margin-bottom: 12px;
+      }
+
+      .description ul {
+        color: var(--text-muted);
+        line-height: 1.8;
+        margin-left: 24px;
+        margin-bottom: 16px;
+      }
+
+      .download-text {
+        margin-top: 24px;
+        color: var(--accent); /* Makes the final line pop with blue color */
+      }
+    </style>
+  </head>
+  <body>
+    <div class="glass-card">
+      <header class="app-header">
+        <img src="/logo.png" alt="App Logo" class="app-logo" />
+
+        <div class="app-info">
+          <h1>
+            Sudoku! Brain Game
+            <svg
+              class="verified-badge"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm-1.9 14.7L6 12.6l1.5-1.5 2.6 2.6 6.4-6.4 1.5 1.5-7.9 7.9z"
+              />
+            </svg>
+          </h1>
+
+          <a
+            href="https://github.com/Madhusudan-Sharma-516"
+            target="_blank"
+            class="developer-link"
+            >Madhusudan Sharma</a
+          >
+
+          <div class="stats-row">
+            <div class="stat-item">
+              <span class="stat-value">4.0 ★</span>
+              <span>Rating</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-value">45 MB</span>
+              <span>Size</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-value">Puzzle, Casual</span>
+              <span>Category</span>
+            </div>
+          </div>
+
+          <a href="#" download class="download-btn">Download App</a>
+        </div>
+      </header>
+
+      <div class="carousel-container">
+        <div class="carousel">
+          <img
+            src="https://docstore.indusappstore.com/public/external/indus-images/preview_images/f46c51bd740210c04366f47a8ea2cc61.webp"
+            alt="App Screenshot 1"
+          />
+          <img
+            src="https://docstore.indusappstore.com/public/external/indus-images/preview_images/5a056ecfaccd0dfe8b740ebed5deddd0.webp"
+            alt="App Screenshot 2"
+          />
+          <img
+            src="https://docstore.indusappstore.com/public/external/indus-images/preview_images/fb1554702c64adb70ed9e3b9b8847c5b.webp"
+            alt="App Screenshot 3"
+          />
+          <img
+            src="https://docstore.indusappstore.com/public/external/indus-images/preview_images/1cb6887bfd8cf135ad69e0e45ecbaecd.webp"
+            alt="App Screenshot 4"
+          />
+          <img
+            src="https://docstore.indusappstore.com/public/external/indus-images/preview_images/44a8272e43afcb4d3d6b8fb20bcf955d.webp"
+            alt="App Screenshot 5"
+          />
+          <img
+            src="https://docstore.indusappstore.com/public/external/indus-images/preview_images/43bc3945e31dc1e9c325a96075e68c5f.webp"
+            alt="App Screenshot 5"
+          />
+          <img
+            src="https://docstore.indusappstore.com/public/external/indus-images/preview_images/8150d19c6c02a04309e481dcd2d8987a.webp"
+            alt="App Screenshot 6"
+          />
+        </div>
+      </div>
+
+      <div class="description">
+        <h2>About this app</h2>
+        <div class="description">
+          <h2>About this app</h2>
+
+          <p>🧩 <strong>Train Your Brain with Classic Sudoku!</strong></p>
+          <p>
+            Enjoy a clean, fast, and distraction-free Sudoku puzzle experience
+            designed for daily brain training. Whether you are a beginner or a
+            puzzle master, this app offers multiple difficulty levels so
+            everyone can enjoy the challenge.
+          </p>
+
+          <h3>🎯 Choose Your Difficulty</h3>
+          <p>
+            Start from Noob level and work your way up to God level. Perfect for
+            both casual players and serious Sudoku lovers.
+          </p>
+
+          <h3>✏️ Smart Solving Tools</h3>
+          <p>Solve puzzles more easily with helpful tools:</p>
+          <ul>
+            <li>Notes mode to keep track of possibilities</li>
+            <li>Undo option to correct mistakes</li>
+            <li>Mistake tracking for better learning</li>
+            <li>Helpful hints when you get stuck</li>
+          </ul>
+
+          <h3>💡 Never Get Stuck</h3>
+          <p>
+            If you run out of hints, you can earn rewarded hints and continue
+            solving without breaking your flow.
+          </p>
+
+          <h3>📊 Track Your Progress</h3>
+          <p>
+            Monitor your improvement with detailed statistics and see how your
+            Sudoku skills grow over time.
+          </p>
+
+          <h3>💾 Continue Anytime</h3>
+          <p>
+            Your puzzles are automatically saved, so you can continue playing
+            anytime without losing progress.
+          </p>
+
+          <h3>⚙️ Simple & Clean Experience</h3>
+          <p>
+            Enjoy smooth animations, responsive controls, and a minimal
+            interface designed for comfortable mobile gameplay.
+          </p>
+
+          <h3>🧠 Why Play Sudoku?</h3>
+          <p>
+            Sudoku helps improve logic, concentration, and problem-solving
+            skills while providing relaxing and engaging gameplay.
+          </p>
+
+          <p>
+            Whether you want a quick brain workout or a long puzzle session,
+            this app delivers the classic Sudoku experience with modern
+            features.
+          </p>
+
+          <p class="download-text">
+            <strong>Download now and start sharpening your mind! 🧠✨</strong>
+          </p>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
